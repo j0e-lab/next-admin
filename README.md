@@ -33,12 +33,12 @@ This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-opti
 ## Exposing The Admin App Component
 
 React-adminは、クライアント側でレンダリングされるSPAとして設計されています。さまざまなクライアント側のみのライブラリ（react-router、material-ui等）が付属しています。
-そのため、NextでAdminAppコンポーネントを含める場合、Nextによるサーバー上でのレンダリングを防止する必要があります。 < 防止しなかった場合どうなるのか
+そのため、NextでAdminAppコンポーネントを含める場合、Nextによるサーバー上でのレンダリングを防止する必要があります。
 
 そのためには、Next.jsでAdminAppコンポーネントを遅延読み込みしてインポートし、ssrオプションをfalseに指定します。（以下記述の話）
 `const AdminApp = dynamic(() => import("@/components/AdminApp"), { ssr: false });`
 
-ssrをfalseにしなかった場合、react-adminがサーバーサイドでレンダリングされるがその際にDOM（ブラウザ上にある）にアクセスできないためエラーになる by gpt
+ssrをfalseにしなかった場合、react-adminがサーバーサイドでレンダリングされるがその際にDOM（ブラウザ上にある）にアクセスできないためエラーになる
 
 ## Rendering React-Admin In A Sub Route
 
