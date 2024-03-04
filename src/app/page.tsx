@@ -1,10 +1,27 @@
-import { NextPage } from "next";
-import dynamic from "next/dynamic";
+"use client";
 
+import { useEffect, useState } from "react";
+import { Admin, Resource, DataProvider, ListGuesser } from "react-admin";
+import buildGraphQLProvider from "ra-data-graphql-simple";
+import { ClientList } from "@/components/ClientList";
 
-const AdminApp = dynamic(() => import("@/components/AdminApp"), { ssr: false });
+export default function Home() {
+  const [dataProvider, setDataProvider] = useState<DataProvider | null>(null);
+  useEffect(() => {
+    buildGraphQLProvider({
+      clientOptions: { uri: "http://127.0.0.1:8000/graphql" },
+    }).then((graphQlDataProvider) =>
+      setDataProvider(() => graphQlDataProvider)
+    );
+  }, []);
 
-// ここがコンポーネントのトップ
-const Home: NextPage = () => <AdminApp />;
+  if (!dataProvider) {
+    return <div>Loading</div>;
+  }
 
-export default Home;
+  return (
+    <Admin dataProvider={dataProvider}>
+      <Resource name="Client" list={ClientList} />
+    </Admin>
+  );
+}
