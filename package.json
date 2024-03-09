@@ -6,23 +6,31 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "generate": "graphql-codegen",
+    "codegen": "graphql-codegen --config codegen.ts"
   },
   "dependencies": {
+    "@graphql-codegen/typed-document-node": "^5.0.6",
+    "@graphql-codegen/typescript": "^4.0.6",
+    "@graphql-codegen/typescript-operations": "^4.2.0",
     "graphql": "^15.8.0",
     "next": "14.1.0",
     "ra-data-graphql-simple": "^4.16.11",
     "ra-data-json-server": "^4.16.11",
     "react": "^18",
     "react-admin": "^4.16.11",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "schema-ast": "^2.0.0"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "^5.0.2",
+    "@graphql-codegen/client-preset": "^4.2.4",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "eslint": "^8",
     "eslint-config-next": "14.1.0",
-    "typescript": "^5"
+    "typescript": "^5.4.2"
   }
 }

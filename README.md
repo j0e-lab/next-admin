@@ -1,7 +1,8 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## 概要
-[react-adminの公式サイト](https://marmelab.com/react-admin/NextJs.html)でnext対応のプロジェクトを作成する章があったのでそこをベースにNext > strawberryにクエリが飛ぶようにしていく。
+- [react-adminの公式サイト](https://marmelab.com/react-admin/NextJs.html)でnext対応のプロジェクトを作成する章があったのでそこをベースにNext > strawberryにクエリが飛ぶようにしていく。
+- [ここのサイト](https://maku.blog/p/n2k2hxd/)を参考にGraphQLスキーマからtypescriptの生成ができるかどうかの検証もこのリポジトリで行っている。
 
 
 ## Getting Started
@@ -43,3 +44,49 @@ ssrをfalseにしなかった場合、react-adminがサーバーサイドでレ�
 ## Rendering React-Admin In A Sub Route
 
 - `http://localhost:3000/admin`みたいなサブルートを作ることもできる
+
+## GraphQLスキーマからtypescriptの自動生成
+
+- 自動生成するうえで必要なconfigファイルはts(codegen.ts)とyaml(codege.yaml)の2通りの形式を選べる > yamlの方が見やすく、使用している人が多い印象
+- tsとyaml2つのconfigがある状態でgenerateするとyamlの内容が優先実行される
+- GraphQLのリクエスト文字列のことをGraphQLドキュメントという（↓こんなやつ）[情報元](https://hasura.io/learn/ja/graphql/intro-graphql/core-concepts/)
+```
+{
+  author {
+    id
+    name
+  }
+}
+```
+
+graphql-codegenコマンドのオプション確認（npmでも似たようなやつあるはず）
+```sh
+yarn -s graphql-codegen --help
+```
+
+オプション
+```
+Options:
+      --help         ヘルプを表示                    [boolean]
+      --version      バージョン表示                   [boolean]
+  -c, --config       コード生成のための設定ファイル（codegen.yaml）のパスを指定する時に使う
+                     デフォルトだとカレントディレクトリのcodegen.yamlを使用  [string]
+  -w, --watch        変更を監視し、自動的にコード生成を実行します。
+  -r, --require      Code Generatorがサポートしていない形式のファイルを読み込む必要がある場合に使用 [array] [default: []]
+  -o, --overwrite    既存のファイルを上書きする                         [boolean]
+  -s, --silent       エラー出力を抑止する                        [boolean]
+  -e, --errors-only  エラーのみ出力する                                 [boolean]
+      --profile      パフォーマンスを計測するためにプロファイラを使用する               [boolean]
+  -p, --project      GraphQL Config内のプロジェクト名を指定                [string]
+  -v, --verbose      パフォーマンス面の詳細出力が欲しい場合に使用 [boolean] [default: false]
+  -d, --debug        デバッグ出力をする       [boolean] [default: false]
+```
+
+ちなみに上記コマンドオプションは`codegen.yaml`にプロパティとして記載することができるため<br>
+必ずしもコマンドオプションとして使用する必要はない。一時的に付与したい場合のみコマンドオプションとして使う感じ。
+
+### 参考情報
+- [GraphQL Code Generator公式](https://the-guild.dev/graphql/codegen/docs/getting-started)
+- [codegen.tsの構成オプション](https://the-guild.dev/graphql/codegen/docs/config-reference/codegen-config)
+- [自動生成手順参考サイト](https://qiita.com/yoshii0110/items/b461e608dc0cff78982e)
+- [GraphQL Code Generatorの使用方法（apollo公式）](https://www.apollographql.com/tutorials/client-side-graphql-react/05-codegen) < こっちの方がGraphQL Code Generatorの公式ページより説明あってわかりやすい

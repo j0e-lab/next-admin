@@ -4,24 +4,21 @@ import { useEffect, useState } from "react";
 import { Admin, Resource, DataProvider, ListGuesser } from "react-admin";
 import buildGraphQLProvider from "ra-data-graphql-simple";
 import { ClientList } from "@/components/ClientList";
+import { Client } from "@/components/Client";
+import {
+  ApolloClient,
+  ApolloProvider,
+  InMemoryCache,
+  HttpLink,
+} from "@apollo/client";
+
+import { WithApollo } from "../components/WithApollo"
 
 export default function Home() {
-  const [dataProvider, setDataProvider] = useState<DataProvider | null>(null);
-  useEffect(() => {
-    buildGraphQLProvider({
-      clientOptions: { uri: "http://127.0.0.1:8000/graphql" },
-    }).then((graphQlDataProvider) =>
-      setDataProvider(() => graphQlDataProvider)
-    );
-  }, []);
-
-  if (!dataProvider) {
-    return <div>Loading</div>;
-  }
 
   return (
-    <Admin dataProvider={dataProvider}>
-      <Resource name="Client" list={ClientList} />
-    </Admin>
+    <WithApollo>
+      <Client />
+    </WithApollo>
   );
 }
