@@ -13,12 +13,13 @@ import {
 } from "@apollo/client";
 
 import { WithApollo } from "../components/WithApollo"
+import { Clients } from "../components/Clients"
 
 export default function Home() {
 
   return (
     <WithApollo>
-      <Client />
+      <Clients />
     </WithApollo>
   );
 }

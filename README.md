@@ -88,5 +88,5 @@ Options:
 ### 参考情報
 - [GraphQL Code Generator公式](https://the-guild.dev/graphql/codegen/docs/getting-started)
 - [codegen.tsの構成オプション](https://the-guild.dev/graphql/codegen/docs/config-reference/codegen-config)
-- [自動生成手順参考サイト](https://qiita.com/yoshii0110/items/b461e608dc0cff78982e)
+- [自動生成手順参考サイト](https://qiita.com/yoshii0110/items/b461e608dc0cff78982e)↓のapolloのサイトとアプローチが微妙に違う。実際のプロジェクトではapolloサイトに記載のある方法で自動生成することになりそう
 - [GraphQL Code Generatorの使用方法（apollo公式）](https://www.apollographql.com/tutorials/client-side-graphql-react/05-codegen) < こっちの方がGraphQL Code Generatorの公式ページより説明あってわかりやすい
