@@ -11,9 +11,6 @@
     "codegen": "graphql-codegen --config codegen.ts"
   },
   "dependencies": {
-    "@graphql-codegen/typed-document-node": "^5.0.6",
-    "@graphql-codegen/typescript": "^4.0.6",
-    "@graphql-codegen/typescript-operations": "^4.2.0",
     "graphql": "^15.8.0",
     "next": "14.1.0",
     "ra-data-graphql-simple": "^4.16.11",

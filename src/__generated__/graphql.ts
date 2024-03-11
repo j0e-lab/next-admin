@@ -14,32 +14,47 @@ export type Scalars = {
   Boolean: { input: boolean; output: boolean; }
   Int: { input: number; output: number; }
   Float: { input: number; output: number; }
-  Date: { input: any; output: any; }
+  /** Date with time (isoformat) */
+  DateTime: { input: any; output: any; }
 };
 
 export type Client = {
   __typename?: 'Client';
-  created_at: Scalars['Date']['output'];
+  created_at: Scalars['DateTime']['output'];
   id: Scalars['ID']['output'];
   name: Scalars['String']['output'];
-  updated_at: Scalars['Date']['output'];
+  updated_at: Scalars['DateTime']['output'];
+};
+
+export type ListMetadata = {
+  __typename?: 'ListMetadata';
+  count: Scalars['Int']['output'];
 };
 
 export type Query = {
   __typename?: 'Query';
   Client?: Maybe<Client>;
-  allClients?: Maybe<Array<Maybe<Client>>>;
+  _allClientsMeta: ListMetadata;
+  allClients: Array<Client>;
 };
 
 
 export type QueryClientArgs = {
-  id: Scalars['ID']['input'];
+  id: Scalars['Int']['input'];
 };
 
 export type ClientsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type ClientsQuery = { __typename?: 'Query', allClients?: Array<{ __typename?: 'Client', id: string, name: string, created_at: any, updated_at: any } | null> | null };
+export type ClientsQuery = { __typename?: 'Query', allClients: Array<{ __typename?: 'Client', id: string, name: string, created_at: any, updated_at: any }> };
+
+export type ClientQueryVariables = Exact<{
+  id: Scalars['Int']['input'];
+}>;
+
+
+export type ClientQuery = { __typename?: 'Query', Client?: { __typename?: 'Client', id: string, name: string, created_at: any, updated_at: any } | null };
 
 
 export const ClientsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Clients"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"allClients"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"updated_at"}}]}}]}}]} as unknown as DocumentNode<ClientsQuery, ClientsQueryVariables>;
+export const ClientDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Client"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"Client"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"updated_at"}}]}}]}}]} as unknown as DocumentNode<ClientQuery, ClientQueryVariables>;

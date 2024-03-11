@@ -7,11 +7,20 @@ query Clients {
   }
 }
 
-query Client {
-  Client(id: 1) {
+query Client($id: Int!) {
+  Client(id: $id) {
     id
     name
     created_at
     updated_at
   }
 }
+
+# mutation CreateClient($name: String!) {
+#   createClient(client: $name) {
+#     id
+#     name
+#     created_at
+#     updated_at
+#   }
+# }

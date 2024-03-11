@@ -1,9 +1,11 @@
 import { useQuery } from "@apollo/client";
-import { ClientDocument, ClientsDocument } from "../generated/schema";
-import { useEffect } from "react";
+import { ClientDocument } from "../__generated__/graphql";
+import { useParams } from "react-router-dom";
+
 
 export const Client = () => {
-  const { data } = useQuery(ClientDocument);
+  // 本当はuseParams()使って受け取ったパラメータをidに指定する
+  const { data } = useQuery(ClientDocument, { variables: { id: 3 } });
 
   if (!data?.Client) {
     return <p>Loading...</p>;
