@@ -13,7 +13,7 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
-    "query Clients {\n  allClients {\n    id\n    name\n    created_at\n    updated_at\n  }\n}\n\nquery Client($id: Int!) {\n  Client(id: $id) {\n    id\n    name\n    created_at\n    updated_at\n  }\n}": types.ClientsDocument,
+    "query Clients {\n  allClients {\n    id\n    name\n    created_at\n    updated_at\n  }\n}\n\nquery Client($id: Int!) {\n  Client(id: $id) {\n    id\n    name\n    created_at\n    updated_at\n  }\n}\n\nmutation CreateClient($name: String!) {\n  createClient(name: $name) {\n    id\n    name\n    created_at\n    updated_at\n  }\n}\n\nmutation UpdateClient($id: Int!, $name: String!) {\n  updateClient(id: $id, name: $name) {\n    id\n    name\n    updated_at\n  }\n}\n\nmutation DeleteClient($id: Int!) {\n  deleteClient(id: $id) {\n    id\n    name\n    created_at\n    updated_at\n  }\n}": types.ClientsDocument,
 };
 
 /**
@@ -33,7 +33,7 @@ export function gql(source: string): unknown;
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "query Clients {\n  allClients {\n    id\n    name\n    created_at\n    updated_at\n  }\n}\n\nquery Client($id: Int!) {\n  Client(id: $id) {\n    id\n    name\n    created_at\n    updated_at\n  }\n}"): (typeof documents)["query Clients {\n  allClients {\n    id\n    name\n    created_at\n    updated_at\n  }\n}\n\nquery Client($id: Int!) {\n  Client(id: $id) {\n    id\n    name\n    created_at\n    updated_at\n  }\n}"];
+export function gql(source: "query Clients {\n  allClients {\n    id\n    name\n    created_at\n    updated_at\n  }\n}\n\nquery Client($id: Int!) {\n  Client(id: $id) {\n    id\n    name\n    created_at\n    updated_at\n  }\n}\n\nmutation CreateClient($name: String!) {\n  createClient(name: $name) {\n    id\n    name\n    created_at\n    updated_at\n  }\n}\n\nmutation UpdateClient($id: Int!, $name: String!) {\n  updateClient(id: $id, name: $name) {\n    id\n    name\n    updated_at\n  }\n}\n\nmutation DeleteClient($id: Int!) {\n  deleteClient(id: $id) {\n    id\n    name\n    created_at\n    updated_at\n  }\n}"): (typeof documents)["query Clients {\n  allClients {\n    id\n    name\n    created_at\n    updated_at\n  }\n}\n\nquery Client($id: Int!) {\n  Client(id: $id) {\n    id\n    name\n    created_at\n    updated_at\n  }\n}\n\nmutation CreateClient($name: String!) {\n  createClient(name: $name) {\n    id\n    name\n    created_at\n    updated_at\n  }\n}\n\nmutation UpdateClient($id: Int!, $name: String!) {\n  updateClient(id: $id, name: $name) {\n    id\n    name\n    updated_at\n  }\n}\n\nmutation DeleteClient($id: Int!) {\n  deleteClient(id: $id) {\n    id\n    name\n    created_at\n    updated_at\n  }\n}"];
 
 export function gql(source: string) {
   return (documents as any)[source] ?? {};

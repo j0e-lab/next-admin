@@ -16,11 +16,28 @@ query Client($id: Int!) {
   }
 }
 
-# mutation CreateClient($name: String!) {
-#   createClient(client: $name) {
-#     id
-#     name
-#     created_at
-#     updated_at
-#   }
-# }
+mutation CreateClient($name: String!) {
+  createClient(name: $name) {
+    id
+    name
+    created_at
+    updated_at
+  }
+}
+
+mutation UpdateClient($id: Int!, $name: String!) {
+  updateClient(id: $id, name: $name) {
+    id
+    name
+    updated_at
+  }
+}
+
+mutation DeleteClient($id: Int!) {
+  deleteClient(id: $id) {
+    id
+    name
+    created_at
+    updated_at
+  }
+}
