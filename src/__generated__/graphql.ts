@@ -26,11 +26,6 @@ export type Client = {
   updated_at: Scalars['DateTime']['output'];
 };
 
-export type ListMetadata = {
-  __typename?: 'ListMetadata';
-  count: Scalars['Int']['output'];
-};
-
 export type Mutation = {
   __typename?: 'Mutation';
   createClient: Client;
@@ -57,7 +52,6 @@ export type MutationUpdateClientArgs = {
 export type Query = {
   __typename?: 'Query';
   Client?: Maybe<Client>;
-  _allClientsMeta: ListMetadata;
   allClients: Array<Client>;
 };
 

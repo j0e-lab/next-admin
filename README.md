@@ -49,6 +49,19 @@ ssrをfalseにしなかった場合、react-adminがサーバーサイドでレ�
 
 - 自動生成するうえで必要なconfigファイルはts(codegen.ts)とyaml(codege.yaml)の2通りの形式を選べる > yamlの方が見やすく、使用している人が多い印象
 - tsとyaml2つのconfigがある状態でgenerateするとyamlの内容が優先実行される
+- バックエンドのスキーマ情報をinstropection経由で取得しているらしいが、その対象になるのは以下の箇所で定義されているQueryやMutationと思われる
+  - そのためバックエンド側で下記定義が用意されていないとtsの生成ができない
+
+```
+@strawberry.type
+class Query:
+    allClients: list[ClientType] = strawberry.field(resolver=get_clients)
+
+@strawberry.type
+class Mutation:
+    createClient: ClientType = strawberry.mutation(resolver=create_client)
+```
+
 - GraphQLのリクエスト文字列のことをGraphQLドキュメントという（↓こんなやつ）[情報元](https://hasura.io/learn/ja/graphql/intro-graphql/core-concepts/)
 ```
 {
