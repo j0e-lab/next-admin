@@ -1,23 +1,23 @@
 import { useQuery, useMutation } from "@apollo/client";
-import { ClientsDocument, CreateClientDocument, DeleteClientDocument, UpdateClientDocument } from "@/__generated__/graphql";
+import {AllClientsDocument, CreateClientDocument, DeleteClientDocument, UpdateClientDocument } from "@/__generated__/graphql";
 
 export const Clients = () => {
-  const { loading, error, data } = useQuery(ClientsDocument);
+  const { loading, error, data } = useQuery(AllClientsDocument);
 
   // 作成ボタンクリック時にクライアントを作成
   // TODO 作成自体はできているもののレスポンス周りでエラーでてるけど一旦スルー
   const [createClient] = useMutation(CreateClientDocument, {
-    variables: { name: "7&i" },
+    variables: { name: "金剛寺食品" },
   });
 
   // 更新ボタンクリック時にクライアントを更新
   const [updateClient] = useMutation(UpdateClientDocument, {
-    variables: { id: 1, name: "渋谷証券" },
+    variables: { updateClientId: 1, name: "渋谷証券" },
   });
 
   // 削除ボタンクリック時にクライアントを削除
   const [deleteClient] = useMutation(DeleteClientDocument, {
-    variables: { id: 3 },
+    variables: { deleteClientId: 3 },
   });
 
   if (loading) return "Loading...";

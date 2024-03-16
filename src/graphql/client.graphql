@@ -1,4 +1,4 @@
-query Clients {
+query AllClients {
   allClients {
     id
     name
@@ -7,8 +7,8 @@ query Clients {
   }
 }
 
-query Client($id: Int!) {
-  Client(id: $id) {
+query Client($clientId: Int!) {
+  Client(id: $clientId) {
     id
     name
     created_at
@@ -25,16 +25,17 @@ mutation CreateClient($name: String!) {
   }
 }
 
-mutation UpdateClient($id: Int!, $name: String!) {
-  updateClient(id: $id, name: $name) {
+mutation UpdateClient($updateClientId: Int!, $name: String!) {
+  updateClient(id: $updateClientId, name: $name) {
     id
     name
+    created_at
     updated_at
   }
 }
 
-mutation DeleteClient($id: Int!) {
-  deleteClient(id: $id) {
+mutation DeleteClient($deleteClientId: Int!) {
+  deleteClient(id: $deleteClientId) {
     id
     name
     created_at

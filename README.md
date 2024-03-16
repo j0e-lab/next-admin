@@ -31,7 +31,14 @@ This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-opti
 - [Pages Router と App Routerの違い](https://qiita.com/Yasushi-Mo/items/865a8d6e1a063058d702)
 - [react-admin関連のエラー対処法](https://github.com/imakyo97/python_catch_up/blob/main/python-catch-up/docs/react_admin.md)
 
-## Exposing The Admin App Component
+## React-Adminチュートリアル
+
+### Using an API As Data Source
+
+- データプロバイダーとは
+  - react-admin単体ではAPIとの通信機能はもっていないため通信用のアダプターが必要 > それがデータプロバイダー
+
+### Exposing The Admin App Component
 
 React-adminは、クライアント側でレンダリングされるSPAとして設計されています。さまざまなクライアント側のみのライブラリ（react-router、material-ui等）が付属しています。
 そのため、NextでAdminAppコンポーネントを含める場合、Nextによるサーバー上でのレンダリングを防止する必要があります。
@@ -41,9 +48,16 @@ React-adminは、クライアント側でレンダリングされるSPAとして
 
 ssrをfalseにしなかった場合、react-adminがサーバーサイドでレンダリングされるがその際にDOM（ブラウザ上にある）にアクセスできないためエラーになる
 
-## Rendering React-Admin In A Sub Route
+### Rendering React-Admin In A Sub Route
 
 - `http://localhost:3000/admin`みたいなサブルートを作ることもできる
+
+### 参考情報
+- [admin使ったデモ画面が見れるとこ](https://marmelab.com/react-admin/Demos.html)
+
+## データプロバイダーを自作する方法
+- [公式](https://marmelab.com/react-admin/DataProviderWriting.html)
+- [Data Providerとは](https://marmelab.com/react-admin/doc/3.19/DataProviders.html)
 
 ## GraphQLスキーマからtypescriptの自動生成
 
@@ -102,5 +116,26 @@ Options:
 - [GraphQL Code Generator公式](https://the-guild.dev/graphql/codegen/docs/getting-started)
 - [codegen.tsの構成オプション](https://the-guild.dev/graphql/codegen/docs/config-reference/codegen-config)
 - [自動生成手順参考サイト](https://qiita.com/yoshii0110/items/b461e608dc0cff78982e)↓のapolloのサイトとアプローチが微妙に違う。実際のプロジェクトではapolloサイトに記載のある方法で自動生成することになりそう
-- [GraphQL Code Generatorの使用方法（apollo公式）](https://www.apollographql.com/tutorials/client-side-graphql-react/05-codegen) < こっちの方がGraphQL Code Generatorの公式ページより説明あってわかりやすい
+- [GraphQL Code Generatorの使用方法（apollo公式）](https://www.apollographql.com/tutorials/client-side-graphql-react/05-codegen) 
+  - こっちの方がGraphQL Code Generatorの公式ページより説明あってわかりやすい
+    - このサイトではqueryをgql関数内に書いているが若干ブサイク。以下サイトを参考に`.graphql`で用意するのがスマート。codegenに`.graphql`のファイルを指定すれば同じように動く
+      - https://qiita.com/yoshii0110/items/b461e608dc0cff78982e  
 - [codegenの設定ファイルが`.ts`だけでなく`yaml`にも対応している理由](https://the-guild.dev/graphql/codegen/docs/config-reference/codegen-config#:~:text=the%20next%20major.-,Other%20ways%20to%20provide%20configuration,-GraphQL%2DCodegen%20uses)
+
+## OpenAPIからTypescript生成
+
+[FastAPI公式](https://fastapi.tiangolo.com/ja/advanced/generate-clients/)に沿って自動生成を実装
+[openapi-typescript-codegen](https://www.npmjs.com/package/openapi-typescript-codegen) < 生成に使用するライブラリ
+
+### Generate Client Code
+
+- 生成コマンド（generate-client）のオプションの詳細はライブラリの[公式ページ](https://www.npmjs.com/package/openapi-typescript-codegen)を参照
+
+### Generate a TypeScript Client with Tags
+
+タグ無しで生成した場合は`client/services/DefaultService.ts`に全てのリクエスト用メソッドが生成されるが、<br>
+タグ付けするとタグごとにServiceファイルが生成されるようになる
+
+### 参考情報
+
+- [openapi-typescript-codegen公式リポジトリ](https://github.com/ferdikoomen/openapi-typescript-codegen/wiki)
